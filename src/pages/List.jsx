@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import Layout from 'src/components/Layout'
 import PostDetailModal from 'src/components/PostDetailModal'
 
 const Page = props => {
+  const location = useLocation()
   const [posts, setPosts] = React.useState([])
   const { postId } = props
 
@@ -25,7 +26,7 @@ const Page = props => {
             <Link
               to={{
                 pathname: `/p/${post.id}`,
-                state: { modal: true },
+                state: { background: location },
               }}
             >
               <Image url={post?.images?.[0]?.url ?? ''} />

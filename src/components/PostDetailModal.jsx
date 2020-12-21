@@ -1,20 +1,24 @@
 import React from 'react'
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+import {
+  Link, useHistory, useLocation, useParams,
+} from 'react-router-dom'
 import styled from 'styled-components'
 import Modal from 'src/components/Modal'
 import PostDetail from 'src/components/PostDetail'
 
-const NavButton = ({ text, history, id }) => (
-  id && <NavButtonElem type="button" onClick={() => history.push(`/p/${id}`, { modal: true })}>{text}</NavButtonElem>
-)
-
-const PostDetailModal = ({ postId }) => {
+const PostDetailModal = ({ location }) => {
+  const { postId } = useParams()
   const history = useHistory()
+
   const [state, setState] = React.useReducer((prev, next) => ({ ...prev, ...next }), {
     prev_id: null,
     next_id: null,
   })
+
+  const NavButton = ({ text, id }) => (
+    id && <NavButtonElem type="button" onClick={() => history.push(`/p/${id}`, { background: location })}>{text}</NavButtonElem>
+  )
 
   React.useEffect(() => {
     console.log('postId', postId);
@@ -84,6 +88,7 @@ const Content = styled.div`
   position: absolute;
   top: 50%;
   left: 0;
+  width: 100%;
   transform: translateY(-50%);
   display: flex;
   justify-content: space-between;

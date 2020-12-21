@@ -9,16 +9,13 @@ import {
 
 import List from 'src/pages/List'
 import Detail from 'src/pages/Detail'
-
-const PostDetail = props => {
-  const modal = props?.location?.state?.modal ?? false
-  const postId = props?.match?.params?.postId ?? null
-  if (modal && postId) return (<List {...props} postId={postId} />)
-  return (<Detail {...props} />)
-}
+import PostDetailModal from 'src/components/PostDetailModal'
 
 function App(props) {
   const history = useHistory()
+  const location = useLocation()
+
+  const background = location.state?.background
 
   React.useEffect(() => {
     window.addEventListener('beforeunload', () => {
@@ -27,10 +24,13 @@ function App(props) {
   }, [history])
 
   return (
-    <Switch>
-      <Route exact path="/p/:postId" render={PostDetail} />
-      <Route exact path="/" component={List} />
-    </Switch>
+    <>
+      <Switch location={background ?? location}>
+        <Route exact path="/p/:postId" component={Detail} />
+        <Route exact path="/" component={List} />
+      </Switch>
+      {background && <Route path="/p/:postId" render={() => <PostDetailModal location={background} />} />}
+    </>
   )
 }
 
