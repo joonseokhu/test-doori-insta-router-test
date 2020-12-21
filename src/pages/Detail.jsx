@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
+import { Link, useParams } from 'react-router-dom'
 import Layout from 'src/components/Layout'
 import Modal from 'src/components/Modal'
 
-const Detail = ({ postId }) => {
+const Detail = () => {
+  const { postId } = useParams()
   const [post, setPost] = React.useState(null)
-
   React.useEffect(() => {
     (async () => {
       const { data } = await axios.get(`http://15.165.17.58/api/posts/${postId}`)
-      console.log(data)
       setPost(data)
     })()
-  }, [])
+  }, [postId])
 
   return (
     <div>
@@ -21,25 +21,4 @@ const Detail = ({ postId }) => {
   )
 }
 
-const Page = props => {
-  const postId = props?.match?.params?.postId ?? null
-  const modal = props?.location?.state?.modal ?? false
-
-  console.log({ postId, modal })
-
-  return (
-    <>
-      {modal ? (
-        <Modal>
-          <Detail postId={postId} />
-        </Modal>
-      ) : (
-        <Layout>
-          <Detail postId={postId} />
-        </Layout>
-      )}
-    </>
-  )
-}
-
-export default Page
+export default Detail
