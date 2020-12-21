@@ -22,8 +22,7 @@ const Page = () => {
               to={{
                 pathname: `/p/${post.id}`,
                 state: { modal: true },
-              }}
-            >
+              }}>
               <Image url={post?.files?.[0]?.url ?? ''} />
             </Link>
           </ListItem>

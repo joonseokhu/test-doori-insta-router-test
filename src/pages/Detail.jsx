@@ -5,7 +5,7 @@ import Modal from 'src/components/Modal'
 
 const Detail = ({ postId }) => {
   const [post, setPost] = React.useState(null)
-
+  
   React.useEffect(() => {
     (async () => {
       const { data } = await axios.get(`http://15.165.17.58/api/posts/${postId}`)
@@ -21,17 +21,17 @@ const Detail = ({ postId }) => {
   )
 }
 
-const Page = props => {
+const Page = (props) => {
   const postId = props?.match?.params?.postId ?? null
   const modal = props?.location?.state?.modal ?? false
 
-  console.log({ postId, modal })
-
+  console.log({postId, modal})
+  
   return (
     <>
       {modal ? (
-        <Modal>
-          <Detail postId={postId} />
+      <Modal>
+        <Detail postId={postId} />
         </Modal>
       ) : (
         <Layout>

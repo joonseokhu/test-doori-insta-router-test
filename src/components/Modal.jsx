@@ -1,21 +1,23 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import styled from 'styled-components'
 
 const Portal = ({ children }) => {
-  const el = document.getElementById('modal-container')
-  return ReactDOM.createPortal(children, el)
+  const el = document.getElementById('modal-container');
+  return ReactDOM.createPortal(children, el);
+};
+
+const Modal = ({ children }) => {
+  return (
+    <Portal>
+      <ModalContainer>
+        {children}
+      </ModalContainer>
+    </Portal>
+  )
 }
 
-const Modal = ({ children }) => (
-  <Portal>
-    <ModalContainer>
-      {children}
-    </ModalContainer>
-  </Portal>
-)
-
-export default Modal
+export default Modal;
 
 const ModalContainer = styled.div`
   position: fixed;
