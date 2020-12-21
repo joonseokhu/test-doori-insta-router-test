@@ -27,12 +27,10 @@ function App(props) {
   }, [history])
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/p/:postId" render={PostDetail} />
-        <Route exact path="/" component={List} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path="/p/:postId" render={PostDetail} />
+      <Route exact path="/" component={List} />
+    </Switch>
   )
 }
 
