@@ -8,7 +8,6 @@ import PostDetailModal from 'src/components/PostDetailModal'
 const Page = props => {
   const location = useLocation()
   const [posts, setPosts] = React.useState([])
-  const { postId } = props
 
   React.useEffect(() => {
     (async () => {
@@ -34,9 +33,6 @@ const Page = props => {
           </ListItem>
         ))}
       </List>
-      {(postId) && (
-        <PostDetailModal postId={postId} />
-      )}
     </Layout>
   )
 }
